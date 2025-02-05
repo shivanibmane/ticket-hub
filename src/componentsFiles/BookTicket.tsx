@@ -5,6 +5,9 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogT
 import { collection, addDoc } from "firebase/firestore"
 import { db } from "./Firebase/firebase"
 import { useState } from "react"
+import { useToast } from "@/hooks/use-toast"
+import { Toaster } from "@/components/ui/toaster"
+
 
 const BookTicket = () => {
   const [title, setTitle] = useState("");
@@ -14,6 +17,7 @@ const BookTicket = () => {
   const [date, setDate] = useState("")
   const [document, setDocument] = useState("")
   const [priority, setPriority] = useState("Low")
+  const { toast } = useToast()
 
 
   const submitFrom = async (e) => {
@@ -32,7 +36,9 @@ const BookTicket = () => {
         document: document,
         priporty: priority
       })
-      console.log("Ticket ID:", tickets.id)
+      toast({
+        description: "Book the ticket successfully",
+      })
       setTitle("")
       setDescription("")
       setEmail("")
@@ -41,13 +47,16 @@ const BookTicket = () => {
       setDocument("")
       setPriority("")
     } catch (e) {
-      console.log("Error:", e)
+      toast({
+        variant: "destructive",
+        description: "Fiald to book the ticket",
+      })
     }
 
   }
 
   return (
-    <Dialog>
+    <><Dialog>
       <DialogTrigger asChild>
         <Button variant="outline">Book Ticket</Button>
       </DialogTrigger>
@@ -94,6 +103,8 @@ const BookTicket = () => {
         </DialogFooter>
       </DialogContent>
     </Dialog >
+      <Toaster />
+    </>
   )
 }
 
