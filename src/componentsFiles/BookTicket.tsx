@@ -17,6 +17,7 @@ const BookTicket = () => {
   const [date, setDate] = useState("")
   const [document, setDocument] = useState("")
   const [priority, setPriority] = useState("Low")
+  const [noOfTicket, setNoOfTicket] = useState("")
   const { toast } = useToast()
 
 
@@ -24,22 +25,26 @@ const BookTicket = () => {
     e.preventDefault();
     if (email && description === "") { return }
     else if (phoneNo && date === "") { return }
-    else if (document === "" && priority === "Low") { return }
+    else if (document === "" && noOfTicket === "") { return }
+    else if (priority === "Low") { return }
     try {
       const tickets = await addDoc(collection(db, 'tickets'), {
         ticketId: new Date(),
         title: title,
+        ticketNo: noOfTicket,
         desc: description,
         email: email,
         phoneNo: phoneNo,
         date: date,
         document: document,
         priporty: priority
+
       })
       toast({
         description: "Book the ticket successfully",
       })
       setTitle("")
+      setNoOfTicket("")
       setDescription("")
       setEmail("")
       setPhoneNo("")
@@ -68,6 +73,10 @@ const BookTicket = () => {
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="title" className="text-left">Ticket Title</Label>
             <Input type="text" id="title" className="col-span-3" value={title} onChange={(e) => setTitle(e.target.value)} />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="notickets" className="text-left">Tickets No.</Label>
+            <Input type="number" id="notickets" className="col-span-3" value={noOfTicket} onChange={(e) => setNoOfTicket(e.target.value)} />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="email" className="text-left">Email</Label>
