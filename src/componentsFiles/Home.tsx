@@ -1,15 +1,12 @@
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import BookTicket from "./BookTicket";
+import CustomerDetails from "./CustomerDetails";
 const Home = () => {
 
   return (
     <>
       <SidebarTrigger />
-      <div className="flex m-auto">
-        <BookTicket />
-      </div>
-
-    </ >
+      <CustomerDetails />
+    </>
   );
 };
 
