@@ -1,11 +1,11 @@
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import CustomerDetails from "./CustomerDetails";
+import TicketsDetails from "./TicketsDetails";
 const Home = () => {
 
   return (
     <>
       <SidebarTrigger />
-      <CustomerDetails />
+      <TicketsDetails />
     </>
   );
 };

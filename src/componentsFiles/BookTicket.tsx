@@ -70,7 +70,7 @@ const BookTicket = () => {
     <>
       <Dialog >
         <DialogTrigger asChild>
-          <Button variant="outline" className="mt-5 mx-7">Book Ticket</Button>
+          <Button>Book Tickets</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]" >
           <DialogHeader>
