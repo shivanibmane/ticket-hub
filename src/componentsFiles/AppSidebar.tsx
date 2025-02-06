@@ -9,22 +9,23 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { LogOutIcon, TicketIcon } from "lucide-react";
+import { IoTicketOutline } from "react-icons/io5";
+import { CiLogout } from "react-icons/ci";
+import { signOut } from "firebase/auth";
+import { auth } from "./Firebase/firebase";
+import { useNavigate } from "react-router";
 
-const items = [
-  {
-    title: "Tickets",
-    url: "#",
-    icon: TicketIcon,
-  },
-  {
-    title: "Logout",
-    url: "#",
-    icon: LogOutIcon,
-  },
-];
+
 
 const AppSidebar = () => {
+  const navigate = useNavigate()
+
+
+  const handleSignOut = async () => {
+    await signOut(auth)
+    navigate("/signin")
+  }
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -32,16 +33,17 @@ const AppSidebar = () => {
           <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <div className="cursor-pointer"><IoTicketOutline /><span >Tickets</span></div>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild >
+                  <div className="cursor-pointer" onClick={handleSignOut}><CiLogout />
+                    <span >Logout</span></div>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

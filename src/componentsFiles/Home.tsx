@@ -1,11 +1,15 @@
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import TicketsDetails from "./TicketsDetails";
-const Home = () => {
+import AppSidebar from "./AppSidebar";
 
+const Home = () => {
   return (
     <>
-      <SidebarTrigger />
-      <TicketsDetails />
+      <SidebarProvider>
+        <AppSidebar />
+        <SidebarTrigger />
+        <TicketsDetails />
+      </SidebarProvider>
     </>
   );
 };
