@@ -1,15 +1,29 @@
-import { SidebarProvider } from "./components/ui/sidebar"
-import AppSidebar from "./componentsFiles/AppSidebar"
+
+import { useContext } from "react"
 import Home from "./componentsFiles/Home"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { AppContext } from "./componentsFiles/context/Appcontext"
+import SignUp from "./componentsFiles/SignUp"
+import SignIn from "./componentsFiles/SignIn"
 
+
+
+const AppContent = () => {
+  const { currentUser } = useContext(AppContext)
+  return currentUser ? <Home /> : <SignUp />
+}
 function App() {
-
   return (
     <>
-      <SidebarProvider>
-        <AppSidebar />
-        <Home />
-      </SidebarProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<AppContent />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
+        </Routes>
+      </BrowserRouter>
+
+
     </>
   )
 }

@@ -7,7 +7,7 @@ import { db } from "./Firebase/firebase"
 import { useState } from "react"
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
-import { Checkbox } from "@/components/ui/checkbox"
+import { useNavigate } from "react-router"
 
 
 const BookTicket = () => {
@@ -20,10 +20,8 @@ const BookTicket = () => {
   const [document, setDocument] = useState("")
   const [priority, setPriority] = useState("")
   const [noOfTicket, setNoOfTicket] = useState("")
-  const [isCondition, setIsCondition] = useState(false)
   const [createdBy, setCreatedBy] = useState("Agent")
   const { toast } = useToast()
-
 
   const submitFrom = async (e) => {
     e.preventDefault();
@@ -31,7 +29,7 @@ const BookTicket = () => {
     else if (phoneNo && date === "") { return }
     else if (document === "" && noOfTicket === "") { return }
     try {
-      const tickets = await addDoc(collection(db, 'tickets'), {
+      const ticket = await addDoc(collection(db, 'tickets'), {
         ticketId: new Date(),
         title: title,
         ticketNo: noOfTicket,
@@ -44,7 +42,6 @@ const BookTicket = () => {
         priority: priority,
         createdBy: createdBy
       })
-      console.log(tickets)
       setTitle("")
       setNoOfTicket("")
       setDescription("")
@@ -64,8 +61,8 @@ const BookTicket = () => {
         description: "Fiald to book the ticket",
       })
     }
-
   }
+
   return (
     <>
       <Dialog >
@@ -110,34 +107,28 @@ const BookTicket = () => {
               </select>
             </div>
             <div className="grid grid-cols-2 items-center gap-2">
-              <Label htmlFor="category" className="text-left" >Create by</Label>
+              <Label htmlFor="category" className="text-left" >Create By</Label>
               <select className="col-span-4 border border-spacing-1 py-2 rounded-lg outline-none" value={createdBy} onChange={(e) => setCreatedBy(e.target.value)} >
                 <option value="Agent" >Agent</option>
                 <option value="Customer" >Customer</option>
 
               </select>
             </div>
-            <div className="grid grid-cols-2 items-center gap-2">
-              <Label htmlFor="attachment" className="text-left" >Attachment</Label>
-              <Input type="file" id="attachment" className="col-span-3" value={document} onChange={(e) => setDocument(e.target.value)} />
-            </div>
+
           </div>
+          <div className="grid grid-cols-2 items-center gap-2">
+            <Label htmlFor="attachment" className="text-left" >Attachment</Label>
+            <Input type="file" id="attachment" className="col-span-3" value={document} onChange={(e) => setDocument(e.target.value)} />
+          </div>
+
+
           <div className="grid grid-cols-2 items-center gap-2">
             <Label htmlFor="desc" className="text-left">Description</Label>
             <textarea aria-describedby="title" id="desc" className="col-span-3 border-gray-400 border outline-none px-2 py-2 text-sm rounded-sm" value={description} onChange={(e) => setDescription(e.target.value)} />
           </div>
-          <div className="flex items-center space-x-2" >
-            <Checkbox id="terms" onClick={() => setIsCondition(!isCondition)} />
-            <label
-              htmlFor="terms"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              aria-disabled
-            >
-              Accept terms and conditions
-            </label>
-          </div>
+
           <DialogFooter>
-            {isCondition ? <Button onClick={submitFrom}>Book</Button> : <Button disabled>Book</Button>}
+            <Button onClick={submitFrom}>Book</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog >
