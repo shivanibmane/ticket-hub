@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { AppContext } from "./componentsFiles/context/Appcontext"
 import SignUp from "./componentsFiles/SignUp"
 import SignIn from "./componentsFiles/SignIn"
+import CustomerTicket from "./componentsFiles/CustomerTicket"
 
 
 
