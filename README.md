@@ -1,50 +1,40 @@
-# React + TypeScript + Vite
+# Ticket Hub 🎟️
+A modern ticket management system built with Vite, React, and Firebase. This project includes authentication, Firestore database integration,
+and a user-friendly UI with a sidebar, modal, and ticket table.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🚀 Live Demo Deployment
+### 🔗 Vercel Deployment
+https://ticket-hub-otqh.vercel.app/
 
-Currently, two official plugins are available:
+### 🛠️ Authentication Credentials
+Username: agent@support.com
+Password: agent123
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🎥 Demo Video
+https://www.loom.com/share/9668be1b76f54352ab8325da1fa7e2a7?sid=94f84c3f-78fd-4408-8452-65fda1fe8407
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 📌 Project Setup
 
-- Configure the top-level `parserOptions` property like this:
+### 1️⃣ Clone the Repository
+git clone https://github.com/shivanibmane/ticket-hub.git
+cd ticket-hub
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### 2️⃣ Install Dependencies & Run the Project
+Run the following commands from the project root:
+
 ```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+npm create vite@latest
+npm install
+npm run dev
 ```
+This will start the development server.
+
+
+## 🛠️ Features & Implementation
+✅ Sidebar & Modal: Interactive UI components for navigation and user actions.
+✅ Tickets Table: Displays ticket details fetched from Firestore.
+✅ Firestore Integration: Stores and manages ticket data in a real-time database.
+✅ Firebase Authentication: Secure login system for authorized access.
+
+
