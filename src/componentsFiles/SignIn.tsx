@@ -6,6 +6,7 @@ import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { auth } from './Firebase/firebase'
+import { Toaster } from '@/components/ui/toaster'
 
 const SignIn = () => {
   const [email, setEmail] = useState("")
@@ -17,6 +18,7 @@ const SignIn = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
+        return
       }
     })
     return unsubscribe
@@ -24,16 +26,14 @@ const SignIn = () => {
 
   const handleUserLogin = async (e) => {
     e.preventDefault()
+    console.log("click")
     try {
-      if (email && password !== "") {
-        await signInWithEmailAndPassword(auth, email, password)
-        toast({
-          description: "Login successfully",
-        })
-      }
+      await signInWithEmailAndPassword(auth, email, password)
+      toast({
+        description: "Login successfully",
+      })
       navigate("/")
     } catch (e) {
-      console.log(e)
       toast({
         variant: "destructive",
         description: "Failed to user login",
@@ -65,6 +65,8 @@ const SignIn = () => {
                   type="email"
                   required
                   autoComplete="off"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
             </div>
@@ -83,6 +85,8 @@ const SignIn = () => {
                   type="password"
                   required
                   autoComplete="off"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="block w-full rounded-md bg-white px-3 py-1.5  sm:text-sm/6"
                 />
               </div>
@@ -105,6 +109,7 @@ const SignIn = () => {
           </p>
         </div>
       </div>
+      <Toaster />
     </div>
   )
 }
