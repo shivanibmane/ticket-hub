@@ -4,7 +4,7 @@ and a user-friendly UI with a sidebar, modal, and ticket table.
 
 ## 🚀 Live Demo Deployment
 ### 🔗 Vercel Deployment
-https://ticket-hub-otqh.vercel.app/
+https://ticket-hub-otqh.vercel.app
 
 ### 🛠️ Authentication Credentials
 Username: agent@support.com
@@ -32,9 +32,9 @@ This will start the development server.
 
 
 ## 🛠️ Features & Implementation
-✅ Sidebar & Modal: Interactive UI components for navigation and user actions.
-✅ Tickets Table: Displays ticket details fetched from Firestore.
-✅ Firestore Integration: Stores and manages ticket data in a real-time database.
+✅ Sidebar & Modal: Interactive UI components for navigation and user actions.  
+✅ Tickets Table: Displays ticket details fetched from Firestore.  
+✅ Firestore Integration: Stores and manages ticket data in a real-time database.  
 ✅ Firebase Authentication: Secure login system for authorized access.
 
 
