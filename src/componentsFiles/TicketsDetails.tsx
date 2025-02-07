@@ -11,7 +11,7 @@ import { MdDelete } from "react-icons/md";
 const TicketsDetails = () => {
 
   const [ticketsData, setTicketsData] = useState(null);
-  console.log(ticketsData);
+  const ticket = ticketsData
 
   useEffect(() => {
     const fetchTicketsDoc = async () => {
@@ -27,7 +27,9 @@ const TicketsDetails = () => {
       }
     };
     fetchTicketsDoc();
-  }, []);
+  }, [ticket]);
+
+
   return (
     <div className="flex flex-col w-11/12 ml-5">
       <div className="flex w-11/12 justify-between items-center mt-8 mb-2 ">
@@ -45,7 +47,7 @@ const TicketsDetails = () => {
             <TableHead>Action</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>{ticketsData?.map((ticket) => (<TableRow key={ticket.id}>
+        <TableBody >{ticketsData?.map((ticket) => (<TableRow key={ticket.id}>
           <TableCell>{ticket.id}</TableCell>
           <TableCell>{ticket.title}</TableCell>
           <TableCell>{ticket.desc}</TableCell>

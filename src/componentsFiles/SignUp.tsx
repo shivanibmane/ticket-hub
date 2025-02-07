@@ -19,7 +19,7 @@ const SignUp = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        navigate("/")
+        return
       }
     })
     return unsubscribe
@@ -28,14 +28,13 @@ const SignUp = () => {
   const createUser = async (e) => {
     e.preventDefault()
     try {
-      if (email && password !== "") {
-        await createUserWithEmailAndPassword(auth, email, password, userName)
+      if (email || password !== "") {
+        await createUserWithEmailAndPassword(auth, email, password)
         toast({
           description: "Create user successfully",
         })
+        navigate("/")
       }
-      navigate("/")
-
     } catch (e) {
       console.log(e)
       toast({
@@ -62,7 +61,7 @@ const SignUp = () => {
 
             <div>
               <Label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
-                User Name
+                Username
               </Label>
               <div className="mt-2">
                 <Input
