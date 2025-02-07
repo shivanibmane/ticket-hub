@@ -3,11 +3,11 @@ import { createContext, useEffect, useState } from "react"
 import { auth } from "../Firebase/firebase"
 
 
-export const AppContext = createContext()
+export const AppContext = createContext({})
 
-const AppProvider = ({ children }) => {
+const AppProvider = ({ children }: any) => {
   const [isUser, setIsUser] = useState(false)
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser]: any = useState(null);
 
 
 

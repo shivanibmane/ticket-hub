@@ -9,7 +9,7 @@ import SignIn from "./componentsFiles/SignIn"
 
 
 const AppContent = () => {
-  const { currentUser } = useContext(AppContext)
+  const { currentUser }: any = useContext(AppContext)
   return currentUser ? <Home /> : <SignUp />
 }
 function App() {

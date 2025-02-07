@@ -24,7 +24,7 @@ const SignIn = () => {
     return unsubscribe
   }, [])
 
-  const handleUserLogin = async (e) => {
+  const handleUserLogin = async (e: any) => {
     e.preventDefault()
     console.log("click")
     try {

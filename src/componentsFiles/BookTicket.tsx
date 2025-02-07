@@ -7,7 +7,6 @@ import { db } from "./Firebase/firebase"
 import { useState } from "react"
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
-import { useNavigate } from "react-router"
 
 
 const BookTicket = () => {
@@ -23,7 +22,7 @@ const BookTicket = () => {
   const [createdBy, setCreatedBy] = useState("Agent")
   const { toast } = useToast()
 
-  const submitFrom = async (e) => {
+  const submitFrom = async (e: any) => {
     e.preventDefault();
     if (email && description === "") { return }
     else if (phoneNo && date === "") { return }
@@ -54,7 +53,7 @@ const BookTicket = () => {
       toast({
         description: "Book the ticket successfully",
       })
-
+      ticket
     } catch (e) {
       toast({
         variant: "destructive",

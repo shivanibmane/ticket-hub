@@ -25,7 +25,7 @@ const SignUp = () => {
     return unsubscribe
   }, [])
 
-  const createUser = async (e) => {
+  const createUser = async (e: any) => {
     e.preventDefault()
     try {
       if (email || password !== "") {

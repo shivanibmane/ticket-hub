@@ -10,14 +10,14 @@ import { MdDelete } from "react-icons/md";
 
 const TicketsDetails = () => {
 
-  const [ticketsData, setTicketsData] = useState(null);
+  const [ticketsData, setTicketsData]: any = useState(null);
   const ticket = ticketsData
 
   useEffect(() => {
     const fetchTicketsDoc = async () => {
       try {
         const data = await getDocs(collection(db, "tickets"));
-        const ticketsArray = data.docs.map((doc) => ({
+        const ticketsArray: any = data.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
         }));
@@ -47,7 +47,7 @@ const TicketsDetails = () => {
             <TableHead>Action</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody >{ticketsData?.map((ticket) => (<TableRow key={ticket.id}>
+        <TableBody >{ticketsData?.map((ticket: any) => (<TableRow key={ticket.id}>
           <TableCell>{ticket.id}</TableCell>
           <TableCell>{ticket.title}</TableCell>
           <TableCell>{ticket.desc}</TableCell>
