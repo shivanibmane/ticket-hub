@@ -8,34 +8,32 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { PAGE_SIZE } from "./constant";
 import TicketsPagination from "./TicketsPagination";
-import { Input } from "@/components/ui/input";
 
 
 
 const TicketsDetails = () => {
 
   const [ticketsData, setTicketsData]: any = useState([]);
-  const ticket = ticketsData
   const [currentPage, setCurrentPage] = useState(0)
 
 
+  const fetchTicketsDoc = async () => {
+    try {
+      const data = await getDocs(collection(db, "tickets"));
+      const ticketsArray: any = data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setTicketsData(ticketsArray);
+      console.log(data)
+    } catch (err) {
+      console.log("Faild to fetch tickets data", err);
+    }
+  };
 
   useEffect(() => {
-    const fetchTicketsDoc = async () => {
-      try {
-        const data = await getDocs(collection(db, "tickets"));
-        const ticketsArray: any = data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setTicketsData(ticketsArray);
-      } catch (err) {
-        console.log("Faild to fetch tickets data", err);
-      }
-    };
-
     fetchTicketsDoc();
-  }, [ticket]);
+  }, []);
 
   const totalTickets = ticketsData.length
   const noOfPages = Math.ceil(totalTickets / PAGE_SIZE)
