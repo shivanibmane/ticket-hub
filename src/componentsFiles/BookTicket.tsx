@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { collection, addDoc } from "firebase/firestore"
+import { collection, addDoc, } from "firebase/firestore"
 import { db } from "./Firebase/firebase"
 import { useState } from "react"
 import { useToast } from "@/hooks/use-toast"
@@ -17,7 +17,7 @@ const BookTicket = () => {
   const [phoneNo, setPhoneNo] = useState("")
   const [date, setDate] = useState("")
   const [document, setDocument] = useState("")
-  const [priority, setPriority] = useState("")
+  const [priority, setPriority] = useState("Low")
   const [noOfTicket, setNoOfTicket] = useState("")
   const [createdBy, setCreatedBy] = useState("Agent")
   const { toast } = useToast()
@@ -61,6 +61,7 @@ const BookTicket = () => {
       })
     }
   }
+
 
   return (
     <>
@@ -110,7 +111,6 @@ const BookTicket = () => {
               <select className="col-span-4 border border-spacing-1 py-2 rounded-lg outline-none" value={createdBy} onChange={(e) => setCreatedBy(e.target.value)} >
                 <option value="Agent" >Agent</option>
                 <option value="Customer" >Customer</option>
-
               </select>
             </div>
 

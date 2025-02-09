@@ -10,7 +10,7 @@ import SignIn from "./componentsFiles/SignIn"
 
 const AppContent = () => {
   const { currentUser }: any = useContext(AppContext)
-  return currentUser ? <Home /> : <SignUp />
+  return currentUser ? <Home /> : <SignIn />
 }
 function App() {
   return (
@@ -22,8 +22,6 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
         </Routes>
       </BrowserRouter>
-
-
     </>
   )
 }

@@ -6,12 +6,19 @@ import { db } from "./Firebase/firebase";
 import { GrView } from "react-icons/gr";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { PAGE_SIZE } from "./constant";
+import TicketsPagination from "./TicketsPagination";
+import { Input } from "@/components/ui/input";
+
 
 
 const TicketsDetails = () => {
 
-  const [ticketsData, setTicketsData]: any = useState(null);
+  const [ticketsData, setTicketsData]: any = useState([]);
   const ticket = ticketsData
+  const [currentPage, setCurrentPage] = useState(0)
+
+
 
   useEffect(() => {
     const fetchTicketsDoc = async () => {
@@ -26,38 +33,49 @@ const TicketsDetails = () => {
         console.log("Faild to fetch tickets data", err);
       }
     };
+
     fetchTicketsDoc();
   }, [ticket]);
 
+  const totalTickets = ticketsData.length
+  const noOfPages = Math.ceil(totalTickets / PAGE_SIZE)
+  const start = currentPage * PAGE_SIZE
+  const end = start + PAGE_SIZE
 
   return (
-    <div className="flex flex-col w-11/12 ml-5">
-      <div className="flex w-11/12 justify-between items-center mt-8 mb-2 ">
-        <h2 className="text-lg font-semibold">Tickets</h2>
-        <div ><BookTicket /></div>
+    <>
+      <div className="flex flex-col w-11/12 ml-5">
+        <div className="flex w-11/12 justify-between items-center mt-8 mb-2 ">
+          <h2 className="text-lg font-semibold">Tickets</h2>
+          <div ><BookTicket /></div>
+        </div>
+        <Table className="w-11/12 ">
+          <TableHeader >
+            <TableRow >
+              <TableHead>Ticket ID</TableHead>
+              <TableHead>Title</TableHead>
+              <TableHead>Description</TableHead>
+              <TableHead>Priority</TableHead>
+              <TableHead>Created By</TableHead>
+              <TableHead>Action</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody >{ticketsData?.slice(start, end).map((ticket: any) => (<TableRow key={ticket.id}>
+            <TableCell className="py-3">{ticket.id}</TableCell>
+            <TableCell className="py-3">{ticket.title}</TableCell>
+            <TableCell className="py-3">{ticket.desc}</TableCell>
+            <TableCell className="py-3">{ticket.priority}</TableCell>
+            <TableCell className="py-3">{ticket.createdBy}</TableCell>
+            <TableCell className="flex gap-4 text-lg"><GrView /><FaEdit /><MdDelete />
+            </TableCell>
+          </TableRow>))}</TableBody>
+        </Table>
+        <div className="my-7 mx-auto flex">
+          <TicketsPagination setCurrentPage={setCurrentPage} noOfPages={noOfPages} currentPage={currentPage} />
+        </div>
       </div>
-      <Table className="w-11/12 ">
-        <TableHeader >
-          <TableRow >
-            <TableHead>Ticket Id</TableHead>
-            <TableHead>Title</TableHead>
-            <TableHead>Description</TableHead>
-            <TableHead>Priority</TableHead>
-            <TableHead>Created By</TableHead>
-            <TableHead>Action</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody >{ticketsData?.map((ticket: any) => (<TableRow key={ticket.id}>
-          <TableCell>{ticket.id}</TableCell>
-          <TableCell>{ticket.title}</TableCell>
-          <TableCell>{ticket.desc}</TableCell>
-          <TableCell>{ticket.priority}</TableCell>
-          <TableCell>{ticket.createdBy}</TableCell>
-          <TableCell className="flex gap-4 text-lg"><GrView /><FaEdit /><MdDelete />
-          </TableCell>
-        </TableRow>))}</TableBody>
-      </Table>
-    </div>
+
+    </>
 
   )
 }
