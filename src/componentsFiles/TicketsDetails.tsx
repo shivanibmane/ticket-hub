@@ -14,6 +14,7 @@ import TicketsPagination from "./TicketsPagination";
 const TicketsDetails = () => {
 
   const [ticketsData, setTicketsData]: any = useState([]);
+  const ticket = ticketsData
   const [currentPage, setCurrentPage] = useState(0)
 
 
@@ -33,7 +34,7 @@ const TicketsDetails = () => {
 
   useEffect(() => {
     fetchTicketsDoc();
-  }, []);
+  }, [ticket]);
 
   const totalTickets = ticketsData.length
   const noOfPages = Math.ceil(totalTickets / PAGE_SIZE)
