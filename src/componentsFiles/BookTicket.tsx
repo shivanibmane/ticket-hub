@@ -9,7 +9,7 @@ import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
 
 
-const BookTicket = () => {
+const BookTicket = ({ setRefresh }: any) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("")
   const [email, setEmail] = useState("")
@@ -54,6 +54,7 @@ const BookTicket = () => {
         description: "Book the ticket successfully",
       })
       ticket
+      setRefresh((pre: boolean) => !pre)
     } catch (e) {
       toast({
         variant: "destructive",
@@ -119,7 +120,6 @@ const BookTicket = () => {
             <Label htmlFor="attachment" className="text-left" >Attachment</Label>
             <Input type="file" id="attachment" className="col-span-3" value={document} onChange={(e) => setDocument(e.target.value)} />
           </div>
-
 
           <div className="grid grid-cols-2 items-center gap-2">
             <Label htmlFor="desc" className="text-left">Description</Label>
